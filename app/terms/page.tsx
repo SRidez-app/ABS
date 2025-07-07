@@ -114,7 +114,7 @@ export default function TermsOfService() {
               <section id="introduction">
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">1. Introduction</h2>
                 <p>
-                  Welcome to Ayubzai Business Solutions (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). These Terms of Service (&quot;Terms&quot;) govern your access to and use of our website at <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://yourwebsite.com</a> (the &quot;Site&quot;) and the software development services (&quot;Services&quot;) we provide.
+                  Welcome to Ayubzai Business Solutions (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). These Terms of Service (&quot;Terms&quot;) govern your access to and use of our website at <a href="https://ayubzaibusinesssolutions.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://ayubzaibusinesssolutions.com/</a> (the &quot;Site&quot;) and the software development services (&quot;Services&quot;) we provide.
                 </p>
                 <p className="mt-4">
                   By accessing or using our Site and Services, you agree to be bound by these Terms. If you disagree with any part of the Terms, then you may not access the Service.
@@ -167,24 +167,24 @@ export default function TermsOfService() {
                 <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
                   <li>**Upfront Payment:** The first payment, representing a portion of the total project cost, is due upfront upon the signing of the SOW to initiate the project.</li>
                   <li>**Subsequent Milestone Payments:** Payments for subsequent milestones will be due upon the successful completion and client approval of each defined milestone, as specified in the SOW.</li>
-                  <li>**Invoicing:** Invoices will be issued according to the agreed-upon payment schedule. Payment is typically due within [NUMBER] days of the invoice date.</li>
-                  <li>**Late Payments:** Late payments may be subject to a late fee of [PERCENTAGE]% per month or the maximum amount permitted by law. Services may be paused or terminated for overdue payments.</li>
+                  <li>**Invoicing:** Invoices will be issued according to the agreed-upon payment schedule. Payment is typically due within 7 days of the invoice date.</li>
+                  <li>**Late Payments:** Late payments may be subject to a late fee of 2% per month or the maximum amount permitted by law. Services may be paused or terminated for overdue payments.</li>
                 </ul>
-                <p className="mt-4">
-                  All prices are quoted in [YOUR CURRENCY, e.g., USD] unless otherwise specified.
-                </p>
-              </section>
 
-              {/* Support Services */}
-              <section id="support-services">
-                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">5. Support Services</h2>
-                <p>
-                  Ayubzai Business Solutions offers support services for completed projects. The scope and duration of post-launch support, maintenance, and bug fixes will be detailed in a separate agreement or within the SOW.
-                </p>
-                <p className="mt-4">
-                  Unless otherwise agreed in writing, standard project delivery includes a [NUMBER, e.g., 30-day] warranty period for critical bug fixes directly related to the delivered code. Beyond this period, ongoing support and maintenance will be provided under a separate support agreement.
-                </p>
               </section>
+{/* Support Services */}
+<section id="support-services">
+  <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">
+    5. Support Services
+  </h2>
+  <p>
+    Ayubzai Business Solutions offers support services for completed projects. The specific scope and duration of post-launch support, maintenance, and bug fixes will be outlined either in a separate support agreement or within the Statement of Work (SOW).
+  </p>
+  <p className="mt-4">
+    Unless otherwise agreed in writing, standard project delivery includes a <span className="font-bold">30-day warranty period</span> for critical bug fixes that are directly related to the delivered code and identified after project completion. This warranty does not cover enhancements, new features, issues resulting from modifications by the Client or third parties, or changes in third-party services or APIs. After the warranty period, all ongoing support and maintenance services will require a separate support agreement.
+  </p>
+</section>
+
 
               {/* Intellectual Property */}
               <section id="intellectual-property">
@@ -203,13 +203,13 @@ export default function TermsOfService() {
                 <p>
                   The Client agrees to:
                 </p>
-                <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
-                  <li>Provide timely access to any necessary information, content, resources, or third-party accounts.</li>
-                  <li>Provide timely feedback and approvals at each stage of the project.</li>
-                  <li>Ensure the accuracy and legality of all content and materials provided to Ayubzai Business Solutions.</li>
-                  <li>Designate a primary contact person for effective communication.</li>
-                  <li>Make timely payments as per the agreed-upon schedule.</li>
-                </ul>
+             <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
+  <li><span className="font-bold">Upfront Payment:</span> The first payment ...</li>
+  <li><span className="font-bold">Subsequent Milestone Payments:</span> ...</li>
+  <li><span className="font-bold">Invoicing:</span> ...</li>
+  <li><span className="font-bold">Late Payments:</span> Late payments may be subject to a late fee of 2% per month or the maximum amount permitted by law. Services may be paused or terminated for overdue payments.</li>
+</ul>
+
               </section>
 
               {/* Disclaimer of Warranties */}
@@ -239,16 +239,19 @@ export default function TermsOfService() {
                 </p>
               </section>
 
-              {/* Governing Law & Dispute Resolution */}
-              <section id="governing-law">
-                <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">11. Governing Law & Dispute Resolution</h2>
-                <p>
-                  These Terms shall be governed and construed in accordance with the laws of [Your State/Country, e.g., the State of California, USA], without regard to its conflict of law provisions.
-                </p>
-                <p className="mt-4">
-                  Any dispute arising from or relating to the subject matter of these Terms shall be resolved by arbitration in [Your City, State/Country, e.g., San Francisco, California, USA], in accordance with the rules of [Arbitration Body, e.g., the American Arbitration Association]. The prevailing party in any action or proceeding shall be entitled to receive its costs and attorneys’ fees.
-                </p>
-              </section>
+       {/* Governing Law & Dispute Resolution */}
+<section id="governing-law">
+  <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">
+    11. Governing Law & Dispute Resolution
+  </h2>
+  <p>
+    These Terms shall be governed and construed in accordance with the laws of the State of Nebraska, USA, without regard to its conflict of law provisions.
+  </p>
+  <p className="mt-4">
+    Any dispute arising from or relating to the subject matter of these Terms shall be resolved by arbitration in Lincoln, Nebraska, USA, in accordance with the rules of the American Arbitration Association (“AAA”). The prevailing party in any action or proceeding shall be entitled to receive its costs and attorneys’ fees.
+  </p>
+</section>
+
 
               {/* Termination */}
               <section id="termination">
@@ -265,7 +268,7 @@ export default function TermsOfService() {
               <section id="changes">
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">13. Changes to These Terms</h2>
                 <p>
-                  We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least [NUMBER, e.g., 30] days&#39; notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+                  We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will provide at least  30 days&#39; notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
                 </p>
                 <p className="mt-4">
                   By continuing to access or use our Service after any revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, you are no longer authorized to use the Service.
@@ -280,12 +283,11 @@ export default function TermsOfService() {
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
                   <li>By email: <a href="mailto:contact@ayubzaibusinesssolutions.com" className="text-blue-400 hover:underline">contact@ayubzaibusinesssolutions.com</a></li>
-                  <li>By visiting this page on our website: <a href="https://yourwebsite.com/contact" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://yourwebsite.com/contact</a></li>
-                  <li>By phone: <a href="tel:+1-555-555-5555" className="text-blue-400 hover:underline">Your Phone Number (e.g., +1-555-555-5555)</a></li>
+                  <li>By visiting this page on our website: <a href="https://www.ayubzaibusinesssolutions.com/contact" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://www.ayubzaibusinesssolutions.com/contact
+</a></li>
+                  <li>By phone: <a href="tel:+1-229-326-5589" className="text-blue-400 hover:underline"> +1-229-326-5589</a></li>
                 </ul>
-                <p className="mt-4 font-bold text-yellow-300">
-                    Remember to replace the placeholder email, website, and phone number with your actual contact details, and fill in bracketed `[ ]` information.
-                </p>
+           
               </section>
 
             </div>

@@ -509,7 +509,7 @@ longDesc: [
               </AnimateOnScroll>
               <AnimateOnScroll delay={100}>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  At Ayubzai  Business Solutions, we redefine software development with AI-driven innovation. Our mission is to deliver high-quality websites, mobile apps, and database solutions that empower businesses to thrive, all while reducing costs through intelligent automation.
+                  At Ayubzai Business Solutions, we redefine software development with AI-driven innovation. Our mission is to deliver high-quality websites, mobile apps, and database solutions that empower businesses to thrive, all while reducing costs through intelligent automation.
                 </p>
               </AnimateOnScroll>
               <AnimateOnScroll delay={200}>
