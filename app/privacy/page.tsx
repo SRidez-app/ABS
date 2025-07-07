@@ -113,7 +113,7 @@ export default function PrivacyPolicy() {
               <section id="introduction">
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">1. Introduction</h2>
                 <p>
-                  Welcome to Ayubzai Business Solutions (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <a href="https://yourwebsite.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://yourwebsite.com</a> (the &quot;Site&quot;), use our services, or interact with us.
+                  Welcome to Ayubzai Business Solutions (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;). We are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <a href="https://ayubzaibusinesssolutions.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">"https://ayubzaibusinesssolutions.com"</a> (the &quot;Site&quot;), use our services, or interact with us.
                 </p>
                 <p className="mt-4">
                   By using our Site and services, you consent to the data practices described in this policy. If you do not agree with the terms of this Privacy Policy, please do not access the Site or use our services.
@@ -243,9 +243,10 @@ export default function PrivacyPolicy() {
               {/* Cookies and Tracking */}
               <section id="cookies">
                 <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6 border-b border-white/20 pb-2">9. Cookies and Other Tracking Technologies</h2>
-                <p>
-                  We use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is set out in our Cookie Policy [Link to Cookie Policy if you have one, otherwise integrate here].
-                </p>
+              <p>
+  We use cookies and similar tracking technologies (like web beacons and pixels) to access or store information. Specific information about how we use such technologies and how you can refuse certain cookies is described below.
+</p>
+
                 <p className="mt-4">
                   **What are Cookies?** Cookies are small data files placed on your device when you visit a website. They are widely used to make websites work, or work more efficiently, as well as to provide reporting information.
                 </p>
@@ -299,7 +300,7 @@ export default function PrivacyPolicy() {
                   If you have any questions about this Privacy Policy, please contact us:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4 mt-3">
-                  <li>By email: <a href="mailto:helloy@ayubzaibusinesssolutions.com" className="text-blue-400 hover:underline">hello@ayubzaibusinesssolutions.com</a></li>
+                  <li>By email: <a href="mailto:hello@ayubzaibusinesssolutions.com" className="text-blue-400 hover:underline">hello@ayubzaibusinesssolutions.com</a></li>
                   <li>By visiting this page on our website: <a href="https://ayubzaibusinesssolutions.com/contact" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">https://ayubzaibusinesssolutions.com/contact</a></li>
                 </ul>
                
