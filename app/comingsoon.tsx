@@ -1,27 +1,50 @@
 import React, { useEffect, useState, useRef, useCallback, useMemo } from 'react';
-import Head from 'next/head';
 
 const ComingSoonPage = () => {
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
   const [time, setTime] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false); // Add loading state
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameRef = useRef<number>(0);
   const timeRef = useRef<number>(0);
 
   // Memoized particle counts based on device capabilities
-  const particleCounts = useMemo(() => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-    const isTablet = typeof window !== 'undefined' && window.innerWidth >= 768 && window.innerWidth < 1024;
+const [particleCounts, setParticleCounts] = useState({
+  quantum: 35,  // Default to desktop values
+  neural: 20,
+  dataStreams: 8,
+  rifts: 5
+});
+
+useEffect(() => {
+  const updateParticleCounts = () => {
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
     
-    return {
+    setParticleCounts({
       quantum: isMobile ? 15 : isTablet ? 25 : 35,
       neural: isMobile ? 8 : isTablet ? 15 : 20,
       dataStreams: isMobile ? 3 : isTablet ? 6 : 8,
       rifts: isMobile ? 2 : isTablet ? 4 : 5
-    };
-  }, []);
+    });
+  };
+
+  updateParticleCounts();
+  window.addEventListener('resize', updateParticleCounts);
+  
+  return () => window.removeEventListener('resize', updateParticleCounts);
+}, []);
+
+// Add loading effect
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setIsLoaded(true);
+  }, 100); // Small delay to ensure styles are applied
+
+  return () => clearTimeout(timer);
+}, []);
 
   // Optimized particle creation with object pooling concept
   const createOptimizedParticle = useCallback((type: string, index: number) => {
@@ -106,7 +129,7 @@ const ComingSoonPage = () => {
   // Optimized animation loop
   useEffect(() => {
     const animate = () => {
-      if (isVisible) {
+      if (isVisible && isLoaded) { // Only animate when loaded
         timeRef.current += 0.016; // ~60fps increment
         setTime(timeRef.current);
       }
@@ -120,11 +143,11 @@ const ComingSoonPage = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isVisible]);
+  }, [isVisible, isLoaded]);
 
   // Optimized particle generation with reduced DOM manipulation
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || !isLoaded) return; // Wait for loading
 
     const fragment = document.createDocumentFragment();
     const containers = {
@@ -160,7 +183,7 @@ const ComingSoonPage = () => {
       document.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [isVisible, particleCounts, createOptimizedParticle, throttledMouseMove, throttledScrollHandler]);
+  }, [isVisible, isLoaded, particleCounts, createOptimizedParticle, throttledMouseMove, throttledScrollHandler]);
 
   // Memoized background style for performance
   const backgroundStyle = useMemo(() => ({
@@ -175,48 +198,51 @@ const ComingSoonPage = () => {
 
   return (
     <>
-      <Head>
-        <title>Coming Soon - Ayubzai Business Solutions</title>
-        <meta name="description" content="Ayubzai Business Solutions - Digital marketing and custom development services launching soon. Schedule your free consultation today!" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#000000" />
+      {/* Critical CSS inlined for better performance */}
+      <style>{`
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+          background: #000;
+          overflow-x: hidden;
+        }
+        img {
+          max-width: 100%;
+          height: auto;
+        }
         
-        {/* Preload critical resources */}
-        <link rel="preload" href="/logo.png" as="image" />
-        <link rel="dns-prefetch" href="//calendly.com" />
-        <link rel="preconnect" href="https://calendly.com" />
+        /* CRITICAL: Prevent FOUC and loading issues */
+        .quantum-container {
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
+        }
         
-        {/* Performance and SEO meta tags */}
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Ayubzai Business Solutions" />
-        <meta property="og:title" content="Coming Soon - Ayubzai Business Solutions" />
-        <meta property="og:description" content="Your complete digital partner for digital marketing, custom web development, and mobile app development." />
-        <meta property="og:type" content="website" />
+        .quantum-container.loaded {
+          opacity: 1;
+        }
         
-        {/* Critical CSS inlined for better performance */}
-        <style>{`
-          * {
-            box-sizing: border-box;
-          }
-          body {
-            margin: 0;
-            padding: 0;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #000;
-            overflow-x: hidden;
-          }
-          img {
-            max-width: 100%;
-            height: auto;
-          }
-        `}</style>
-      </Head>
+        /* Fix quantum rings initial positioning */
+        .quantum-ring {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.8);
+          transition: all 0.5s ease-out;
+        }
+        
+        .quantum-container.loaded .quantum-ring {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
+      `}</style>
 
       {/* OPTIMIZED QUANTUM DIMENSIONAL EXPERIENCE */}
       <div 
         ref={containerRef}
-        className="quantum-container"
-        style={backgroundStyle}
+        className={`quantum-container ${isLoaded ? 'loaded' : ''}`}
+        style={isLoaded ? backgroundStyle : { background: '#000' }}
       >
         {/* Optimized particle containers with better z-indexing */}
         <div id="quantum-field" className="particle-layer" style={{ zIndex: 1 }} />
@@ -225,10 +251,10 @@ const ComingSoonPage = () => {
         <div id="dimensional-rifts" className="particle-layer" style={{ zIndex: 4 }} />
 
         {/* Optimized grid with CSS variables */}
-        <div className="spacetime-grid" style={{ ['--grid-opacity' as any]: isVisible ? 0.15 : 0 }} />
+        <div className="spacetime-grid" style={{ ['--grid-opacity' as any]: isVisible && isLoaded ? 0.15 : 0 }} />
 
         {/* Simplified holographic UI for better performance */}
-        {isVisible && (
+        {isVisible && isLoaded && (
           <div className="holographic-ui-container">
             {[...Array(12)].map((_, i) => (
               <div
@@ -244,28 +270,29 @@ const ComingSoonPage = () => {
         )}
 
         {/* Optimized portal with CSS transforms */}
-        <div 
-          className="interdimensional-portal"
-          style={{
-            ['--mouse-x' as any]: `${mousePosition.x}%`,
-            ['--mouse-y' as any]: `${mousePosition.y}%`,
-            ['--time' as any]: time
-          }}
-        >
-          {[...Array(4)].map((_, i) => (
-            <div
-              key={i}
-              className="portal-layer"
-              style={{ ['--layer' as any]: i }}
-            />
-          ))}
-        </div>
+        {isLoaded && (
+          <div 
+            className="interdimensional-portal"
+            style={{
+              ['--mouse-x' as any]: `${mousePosition.x}%`,
+              ['--mouse-y' as any]: `${mousePosition.y}%`,
+              ['--time' as any]: time
+            }}
+          >
+            {[...Array(4)].map((_, i) => (
+              <div
+                key={i}
+                className="portal-layer"
+                style={{ ['--layer' as any]: i }}
+              />
+            ))}
+          </div>
+        )}
 
         {/* Main content with improved layout */}
         <main className="main-content">
           
-          {/* Optimized logo section */}
-           
+                     
           {/* Logo with Static Design */}
           <div className="mb-8 animate-fade-in-up">
             <div 
@@ -275,16 +302,16 @@ const ComingSoonPage = () => {
                 className="quantum-field-distortion"
               />
     <div className="quantum-rings">
-  {[...Array(5)].map((_, i) => (
-    <div
-      key={i}
-      className="quantum-ring"
- style={{
-  ...({ '--ring-delay': i } as React.CSSProperties),
-  animationDelay: `${i * 0.2}s`
-}}
-    />
-  ))}
+{[...Array(5)].map((_, i) => (
+  <div
+    key={i}
+    className="quantum-ring"
+    style={{
+      ...({ '--ring-delay': i } as React.CSSProperties),
+      animationDelay: `${i * 0.2}s`
+    }}
+  />
+))}
 </div>       <img 
                 src="/logo.png"
                 alt="Ayubzai Business Solutions Logo" 
@@ -292,6 +319,9 @@ const ComingSoonPage = () => {
               />
             </div>
           </div>
+          {/* Optimized logo section */}
+           
+       
 
           {/* Improved typography hierarchy */}
           <div className="content-wrapper">
@@ -337,6 +367,13 @@ const ComingSoonPage = () => {
               </p>
             </div>
 
+        
+        {/* Preload critical resources */}
+        <link rel="preload" href="/logo.png" as="image" />
+        <link rel="dns-prefetch" href="//calendly.com" />
+        <link rel="preconnect" href="https://calendly.com" />
+        
+        
             {/* Optimized CTA button */}
             <div className="cta-section">
               <a
@@ -375,16 +412,16 @@ const ComingSoonPage = () => {
         }
 
         /* Optimized animations with better performance */
-        @keyframes quantumFluctuation {
-          0%, 100% { 
-            transform: translate3d(0, 0, 0) scale(1);
-            opacity: 0.4;
-          }
-          50% { 
-            transform: translate3d(10px, 15px, 0) scale(1.1);
-            opacity: 0.8;
-          }
-        }
+     @keyframes quantumFluctuation {
+  0%, 100% { 
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.4;
+  }
+  50% { 
+    transform: translate3d(10px, 15px, 0) scale(1.1);
+    opacity: 0.8;
+  }
+}
 
         @keyframes neuralPulse {
           0%, 100% { 
@@ -597,27 +634,36 @@ const ComingSoonPage = () => {
           inset: 0;
         }
 
-.quantum-ring {
+    .quantum-ring {
   position: absolute;
   inset: calc(-5px * (var(--ring-delay, 0) + 1));
   border: 1px solid hsla(200, 70%, 50%, calc(0.2 - var(--ring-delay, 0) * 0.05));
   border-radius: 50%;
   animation: quantumFluctuation calc(3s + var(--ring-delay, 0) * 1s) infinite ease-in-out;
   animation-delay: calc(var(--ring-delay, 0) * 0.5s);
+          
+          /* Fixed positioning */
+          left: -10%;
+          top: -10%;
+          width: calc(100% + 10px * (var(--ring-delay, 0) + 1));
+          height: calc(100% + 10px * (var(--ring-delay, 0) + 1));
+        }
 
-  left: -10%;
-  top: -10%;
-  transform: translate(-50%, -50%);
-  width: calc(100% + 10px * (var(--ring-delay, 0) + 1));
-  height: calc(100% + 10px * (var(--ring-delay, 0) + 1));
-}
-        .logo-image {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
+        .logo-placeholder {
           position: relative;
           z-index: 2;
-          border-radius: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: white;
+        }
+        
+        .logo-text {
+          font-size: 20px;
+          font-weight: bold;
+          margin-top: 8px;
+          letter-spacing: 1px;
         }
 
         .content-wrapper {
@@ -860,7 +906,7 @@ const ComingSoonPage = () => {
         @media (max-width: 480px) {
           .quantum-container {
             min-height: 100vh;
-            min-height: 100svh; /* Small viewport height for mobile browsers */
+            min-height: 100svh;
           }
 
           .main-content {
@@ -898,7 +944,6 @@ const ComingSoonPage = () => {
             font-size: 0.95rem;
           }
 
-          /* Reduce particles on very small screens */
           .quantum-particle {
             width: 3px;
             height: 3px;
@@ -971,22 +1016,6 @@ const ComingSoonPage = () => {
           }
         }
 
-        /* High-resolution display optimizations */
-        @media (min-resolution: 2dppx) {
-          .quantum-particle,
-          .neural-particle,
-          .dimensional-particle {
-            image-rendering: crisp-edges;
-          }
-        }
-
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-          .quantum-container {
-            background-color: #000;
-          }
-        }
-
         /* Reduced motion support for accessibility */
         @media (prefers-reduced-motion: reduce) {
           *,
@@ -1011,81 +1040,16 @@ const ComingSoonPage = () => {
           }
         }
 
-        /* Print styles */
-        @media print {
-          .particle-layer,
-          .spacetime-grid,
-          .holographic-ui-container,
-          .interdimensional-portal {
-            display: none !important;
-          }
-
-          .quantum-container {
-            background: white !important;
-            color: black !important;
-            min-height: auto !important;
-          }
-
-          .company-name,
-          .coming-soon-title {
-            color: black !important;
-            text-shadow: none !important;
-          }
-
-          .primary-description,
-          .secondary-description,
-          .coming-soon-description {
-            color: #333 !important;
-          }
-
-          .quantum-cta-button {
-            background: #333 !important;
-            color: white !important;
-            border: 2px solid #333 !important;
-          }
-        }
-
         /* Focus styles for accessibility */
         .quantum-cta-button:focus {
           outline: 3px solid hsla(220, 70%, 60%, 0.8);
           outline-offset: 2px;
         }
 
-        /* Loading state optimization */
-        .quantum-container[data-loaded="false"] .particle-layer {
-          opacity: 0;
-        }
-
-        .quantum-container[data-loaded="true"] .particle-layer {
-          opacity: 1;
-          transition: opacity 0.5s ease-in-out;
-        }
-
-        /* Prefetch and preload hints */
-        .quantum-cta-button::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3C/svg%3E");
-        }
-
-        /* Container queries for modern browsers */
-        @supports (container-type: inline-size) {
-          .content-wrapper {
-            container-type: inline-size;
-          }
-
-          @container (max-width: 400px) {
-            .company-name {
-              font-size: 1.8rem;
-            }
-          }
-
-          @container (min-width: 800px) {
-            .primary-description {
-              font-size: 1.3rem;
-            }
-          }
+        .quantum-cta-button:focus-visible {
+          outline: 3px solid #60a5fa;
+          outline-offset: 3px;
+          box-shadow: 0 0 0 6px hsla(220, 70%, 50%, 0.2);
         }
 
         /* GPU acceleration hints */
