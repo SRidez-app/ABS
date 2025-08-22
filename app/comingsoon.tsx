@@ -225,12 +225,12 @@ const ComingSoonPage = () => {
         <div id="dimensional-rifts" className="particle-layer" style={{ zIndex: 4 }} />
 
         {/* Optimized grid with CSS variables */}
-        <div className="spacetime-grid" style={{ ['--grid-opacity' as any]: isVisible ? 0.1 : 0 }} />
+        <div className="spacetime-grid" style={{ ['--grid-opacity' as any]: isVisible ? 0.15 : 0 }} />
 
         {/* Simplified holographic UI for better performance */}
         {isVisible && (
           <div className="holographic-ui-container">
-            {[...Array(6)].map((_, i) => (
+            {[...Array(12)].map((_, i) => (
               <div
                 key={i}
                 className="holographic-ui"
@@ -495,10 +495,10 @@ const ComingSoonPage = () => {
           position: absolute;
           inset: 0;
           background-image: 
-            linear-gradient(rgba(100, 255, 255, var(--grid-opacity)) 1px, transparent 1px),
+            linear-gradient(rgba(100, 255, 255, var(--grid-opacity)) 3px, transparent 1px),
             linear-gradient(90deg, rgba(100, 255, 255, var(--grid-opacity)) 1px, transparent 1px);
           background-size: 40px 40px;
-          opacity: var(--grid-opacity, 0.1);
+          opacity: var(--grid-opacity, 0.5);
           transition: opacity 0.3s ease;
           contain: strict;
         }
@@ -516,10 +516,10 @@ const ComingSoonPage = () => {
           height: clamp(30px, 5vw, 50px);
           border: 1px solid hsla(200, 70%, 50%, 0.3);
           background: hsla(200, 70%, 50%, 0.03);
-          left: calc(10% + var(--offset, 0) * 1%);
+          left: calc(17% + var(--offset, 0) * 1%);
           top: calc(20% + sin(var(--time, 0) + var(--delay, 0)) * 20px);
           transform: rotate(calc(var(--time, 0) * 5deg + var(--delay, 0) * 30deg)) translateZ(0);
-          opacity: calc(0.3 + sin(var(--time, 0) + var(--delay, 0)) * 0.2);
+         opacity: calc(0.6 + sin(var(--time, 0) + var(--delay, 0)) * 0.3);
           clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
           will-change: transform, opacity;
         }
