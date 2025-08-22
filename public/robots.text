@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.ayubzaibusinesssolutions.com/sitemap.xml
+
+# Block access to admin areas (when you add them later)
+Disallow: /admin/
+Disallow: /api/
+
+# Allow all favicon and logo files
+Allow: /favicon.ico
+Allow: /favicon.svg
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.svg
+
+# Crawl delay (optional - set to 1 second)
+Crawl-delay: 1

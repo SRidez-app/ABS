@@ -1,0 +1,368 @@
+'use client'
+import Head from 'next/head';
+import ComingSoonPage from './comingsoon';
+
+export default function Home() {
+  // Business details for Ayub Zaib Business Solutions
+  const businessInfo = {
+    name: "Ayub Zaib Business Solutions",
+    legalName: "Ayub Zaib Business Solutions",
+    description: "Remote digital marketing specialist and custom web developer serving businesses across Nebraska and nationwide. Based in Lincoln, NE, delivering strategic marketing solutions and custom development services.",
+    url: "https://www.ayubzaibusinesssolutions.com",
+    email: "hello@ayubzaibusinesssolutions.com",
+    phone: "+1-229-326-5589",
+    location: {
+      city: "Lincoln",
+      state: "Nebraska", 
+      zip: "68508",
+      country: "US",
+      coordinates: {
+        lat: "40.8136",
+        lng: "-96.7026"
+      }
+    },
+    keywords: "digital marketing consultant Nebraska, remote web developer Lincoln NE, digital marketing specialist, custom web development nationwide, SEO consultant Nebraska, branding specialist Lincoln, email marketing freelancer, remote marketing consultant United States, Ayub Zaib Business Solutions",
+    services: [
+      "Digital Marketing Strategy",
+      "Custom Web Development", 
+      "SEO Optimization",
+      "Brand Development",
+      "Email Marketing",
+      "Social Media Marketing",
+      "Content Strategy",
+      "Analytics & Reporting"
+    ],
+    serviceAreas: [
+      "Lincoln, Nebraska",
+      "Omaha, Nebraska", 
+      "Nebraska Statewide",
+      "United States",
+      "Remote Worldwide"
+    ],
+    foundingDate: "2024",
+    priceRange: "$$"
+  };
+
+  // Professional Service Schema (better than Organization for freelancers)
+  const professionalServiceSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${businessInfo.url}#business`,
+    "name": businessInfo.name,
+    "description": businessInfo.description,
+    "url": businessInfo.url,
+    "email": businessInfo.email,
+    "telephone": businessInfo.phone,
+    "image": {
+      "@type": "ImageObject",
+      "url": `${businessInfo.url}/logo-square.png`,
+      "width": "720",
+      "height": "720"
+    },
+    "logo": {
+      "@type": "ImageObject", 
+      "url": `${businessInfo.url}/logo.png`,
+      "width": "600",
+      "height": "60"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": businessInfo.location.city,
+      "addressRegion": businessInfo.location.state,
+      "postalCode": businessInfo.location.zip,
+      "addressCountry": businessInfo.location.country
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": businessInfo.location.coordinates.lat,
+      "longitude": businessInfo.location.coordinates.lng
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Lincoln",
+        "addressRegion": "Nebraska",
+        "addressCountry": "US"
+      },
+      {
+        "@type": "City", 
+        "name": "Omaha",
+        "addressRegion": "Nebraska",
+        "addressCountry": "US"
+      },
+      {
+        "@type": "State",
+        "name": "Nebraska", 
+        "addressCountry": "US"
+      },
+      {
+        "@type": "Country",
+        "name": "United States"
+      }
+    ],
+    "serviceType": businessInfo.services,
+    "availableChannel": {
+      "@type": "ServiceChannel",
+      "serviceType": "Remote Consultation",
+      "availableLanguage": "English"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": businessInfo.phone,
+      "email": businessInfo.email,
+      "contactType": "customer service",
+      "availableLanguage": "English",
+      "areaServed": ["US", "Nebraska"],
+      "serviceArea": {
+        "@type": "AdministrativeArea",
+        "name": "United States"
+      }
+    },
+    "knowsAbout": businessInfo.services,
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Marketing & Development Services",
+      "itemListElement": businessInfo.services.map((service, index) => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": service,
+          "areaServed": "United States"
+        }
+      }))
+    }
+  };
+
+  // Person Schema (important for freelancers/personal brands)
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person", 
+    "@id": `${businessInfo.url}#person`,
+    "name": "Ayub Zaib",
+    "jobTitle": "Digital Marketing Specialist & Web Developer",
+    "description": "Remote digital marketing specialist and custom web developer based in Lincoln, Nebraska, serving clients nationwide.",
+    "url": businessInfo.url,
+    "email": businessInfo.email,
+    "telephone": businessInfo.phone,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": businessInfo.location.city,
+      "addressRegion": businessInfo.location.state,
+      "addressCountry": businessInfo.location.country
+    },
+    "workLocation": {
+      "@type": "Place",
+      "name": "Remote Office",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": businessInfo.location.city,
+        "addressRegion": businessInfo.location.state,
+        "addressCountry": businessInfo.location.country
+      }
+    },
+    "knowsAbout": businessInfo.services,
+    "worksFor": {
+      "@id": `${businessInfo.url}#business`
+    }
+  };
+
+  // Website Schema
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${businessInfo.url}#website`,
+    "name": businessInfo.name,
+    "url": businessInfo.url,
+    "description": businessInfo.description,
+    "publisher": {
+      "@id": `${businessInfo.url}#person`
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${businessInfo.url}/search?q={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  // Service Schema for Digital Marketing
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${businessInfo.url}#services`,
+    "name": "Digital Marketing & Custom Development Services",
+    "description": "Comprehensive digital marketing and custom web development services for businesses nationwide",
+    "provider": {
+      "@id": `${businessInfo.url}#business`
+    },
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "United States"
+      },
+      {
+        "@type": "State", 
+        "name": "Nebraska"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Marketing & Development Services",
+      "itemListElement": businessInfo.services.map(service => ({
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": service
+        }
+      }))
+    },
+    "serviceType": "Digital Marketing",
+    "category": "Professional Services"
+  };
+
+  return (
+    <>
+      <Head>
+        {/* Primary Meta Tags - Optimized for Remote/Nationwide */}
+        <title>Ayub Zaib Business Solutions | Digital Marketing Specialist | Lincoln, NE | Serving Nebraska & Nationwide</title>
+        <meta name="title" content="Ayub Zaib Business Solutions | Digital Marketing Specialist | Lincoln, NE | Serving Nebraska & Nationwide" />
+        <meta name="description" content="Remote digital marketing specialist and custom web developer based in Lincoln, Nebraska. Ayub Zaib Business Solutions serves businesses statewide and nationwide with strategic marketing solutions and custom development." />
+        <meta name="keywords" content={businessInfo.keywords} />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="language" content="English" />
+        <meta name="author" content="Ayub Zaib" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        {/* Canonical URL */}
+        <link rel="canonical" href={businessInfo.url} />
+        
+        {/* Geo-targeting - Based in Lincoln but serving nationwide */}
+        <meta name="geo.region" content="US-NE" />
+        <meta name="geo.placename" content="Lincoln, Nebraska" />
+        <meta name="geo.position" content="40.8136;-96.7026" />
+        <meta name="ICBM" content="40.8136, -96.7026" />
+        
+        {/* Service Area Coverage */}
+        <meta name="DC.coverage" content="United States, Nebraska, Lincoln" />
+        <meta name="DC.subject" content="Remote Digital Marketing, Freelance Web Development, Nebraska Marketing Services, Ayub Zaib Business Solutions" />
+        
+        {/* Business Type */}
+        <meta name="business.type" content="Professional Services" />
+        <meta name="business.service_area" content="United States" />
+        
+        {/* Favicons - Complete Set */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="icon" type="image/png" sizes="128x128" href="/favicon-128x128.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+        <link rel="icon" type="image/png" sizes="196x196" href="/favicon-196x196.png" />
+        <link rel="icon" type="image/png" sizes="228x228" href="/favicon-228x228.png" />
+        
+        {/* Apple Touch Icons */}
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+        <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+        
+        {/* Android Chrome Icons */}
+        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
+        
+        {/* Microsoft Tiles */}
+        <meta name="msapplication-TileImage" content="/mstile-150x150.png" />
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+        
+        {/* Web App Manifest */}
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#000000" />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={businessInfo.name} />
+        <meta property="og:url" content={businessInfo.url} />
+        <meta property="og:title" content="Ayub Zaib Business Solutions | Digital Marketing Specialist | Lincoln, NE | Serving Nebraska & Nationwide" />
+        <meta property="og:description" content="Remote digital marketing specialist and custom web developer based in Lincoln, Nebraska. Ayub Zaib Business Solutions serves businesses statewide and nationwide with strategic marketing solutions." />
+        <meta property="og:image" content={businessInfo.url + "/og-image.png"} />
+        <meta property="og:image:alt" content="Ayub Zaib Business Solutions - Digital Marketing Specialist - Lincoln, Nebraska" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:locale" content="en_US" />
+        
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content={businessInfo.url} />
+        <meta name="twitter:title" content="Ayub Zaib Business Solutions | Digital Marketing Specialist | Lincoln, NE | Serving Nebraska & Nationwide" />
+        <meta name="twitter:description" content="Remote digital marketing specialist and custom web developer based in Lincoln, Nebraska. Ayub Zaib Business Solutions serves businesses statewide and nationwide." />
+        <meta name="twitter:image" content={businessInfo.url + "/twitter-card.png"} />
+        <meta name="twitter:image:alt" content="Ayub Zaib Business Solutions - Digital Marketing Specialist - Lincoln, Nebraska" />
+        
+        {/* LinkedIn */}
+        <meta property="og:image" content={businessInfo.url + "/linkedin-image.png"} />
+        
+        {/* Professional/Freelancer Specific SEO */}
+        <meta name="profession" content="Digital Marketing Specialist" />
+        <meta name="service.type" content="Remote Digital Marketing Services" />
+        <meta name="service.area" content="United States, Nebraska" />
+        <meta name="freelancer" content="true" />
+        <meta name="remote.work" content="true" />
+        
+        {/* Brand Specific SEO */}
+        <meta name="brand" content="Ayub Zaib Business Solutions" />
+        <meta name="owner" content="Ayub Zaib" />
+        <meta name="company" content="Ayub Zaib Business Solutions" />
+        
+        {/* Additional SEO */}
+        <meta name="rating" content="General" />
+        <meta name="distribution" content="Global" />
+        <meta name="revisit-after" content="1 days" />
+        <meta name="expires" content="never" />
+        <meta name="format-detection" content="telephone=yes" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="MobileOptimized" content="320" />
+        
+        {/* Preconnect for Performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* DNS Prefetch */}
+        <link rel="dns-prefetch" href="//www.google-analytics.com" />
+        <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+        
+        {/* Structured Data Schemas */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(professionalServiceSchema)
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema)
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema)
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(serviceSchema)
+          }}
+        />
+      </Head>
+
+      <ComingSoonPage />
+    </>
+  );
+}
